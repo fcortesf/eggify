@@ -77,3 +77,20 @@ npx http-server ./local-browser-test -p 4000
 npm install -g gzip-size-cli
 gzip-size dist/index.js dist/index.cjs dist/index.global.js
 1.2 kB
+
+## 🧠 AI Usage Notice
+
+AI was used as a tool for assistance — for example, to write comments, extract certain types, or configure some options.  
+However, this is **NOT** an AI-driven coding project.
+
+If you wish to contribute code that involves AI assistance, please add a comment at the end of the file stating:
+
+```javascript
+// Contains AI-generated code
+```
+
+so it can be reviewed in more detail.
+
+(Fragment created using AI)
+
+I will add custom instructions for copilot in the near future
