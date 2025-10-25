@@ -7,7 +7,7 @@ npm install eggify
 ```
 
 ## Features
-- Lightweight (~1 KB gzipped)
+- Lightweight (~1-2 KB gzipped)
 - Custom cheat code patterns
 - Optional key delay limit
 - Works with AbortController
@@ -72,3 +72,8 @@ npm link eggify
 npx http-server ./local-browser-test -p 4000
 # open http://localhost:4000
 ```
+
+## Size check
+npm install -g gzip-size-cli
+gzip-size dist/index.js dist/index.cjs dist/index.global.js
+1.2 kB
