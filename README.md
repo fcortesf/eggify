@@ -8,14 +8,23 @@ npm install code-easter-eggs
 
 ## Features
 - Lightweight (~1-2 KB gzipped)
+- **Browser-only** (requires DOM and KeyboardEvent API)
 - Custom cheat code patterns
 - Optional key delay limit
 - Works with AbortController
 - Ignores input/textarea by default
-- Works in browsers and bundlers
+- Works with modern bundlers (Webpack, Vite, etc.)
+
+## Platform Support
+- ✅ Browsers (Chrome, Firefox, Safari, Edge)
+- ✅ Electron apps
+- ✅ Browser extensions
+- ❌ Node.js (server-side)
+- ❌ React Native
+- ❌ Terminal applications
 
 ## How to use it
-**ESM**
+**ESM (Browser/Bundler)**
 ```javascript
 import { onCheatCode } from "code-easter-eggs";
 
@@ -24,10 +33,10 @@ onCheatCode("↑↑↓↓←→←→BA", () => {
 });
 ```
 
-**CJS**
+**CJS (Bundler with CommonJS)**
 ```javascript
 const { onCheatCode } = require("code-easter-eggs");
-
+// Note: Still requires browser environment
 onCheatCode("↑↑↓↓←→←→BA", () => {
   console.log("hi!");
 });
@@ -47,6 +56,34 @@ onCheatCode("↑↑↓↓←→←→BA", () => {
 ```javascript
 import "code-easter-eggs";
 window.onCheatCode!("↑↑↓↓←→←→BA", () => { /* ... */ });
+
+```
+
+## Different ways to introduce codes
+
+**Secret code**
+```javascript
+onCheatCode("↑↑↓↓←→←→BA", () => {
+  alert("🥚 Secret unlocked!");
+});
+```
+**Key code**
+```javascript
+onCheatCode('ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight b a', () => {
+  showEasterEgg('FAMOUS CODE!<br/>30 Lives Unlocked! 🎮', '🕹️');
+});
+```
+**Simple word cheat code**
+```javascript
+onCheatCode('eggify', () => {
+    showEasterEgg('You found the Eggify secret! 🥚✨', '🥚');
+});
+```
+**Number sequence**
+```javascript
+onCheatCode('1 2 3 4 5', () => {
+    showEasterEgg('Numbers are magic! 🔢✨', '🔢');
+});
 
 ```
 
