@@ -161,7 +161,7 @@ function onKeyDown(ev: KeyboardEvent) {
           // swallow to not break the page
         }
       }
-    } else if(!code.startsWith("Shift") && !code.startsWith("Control") && !code.startsWith("Alt")) {
+    } else if (!code.startsWith("Shift") && !code.startsWith("Control") && !code.startsWith("Alt")) {
       // if doesn't match, see if restarts at 0 or 1 (KMP would be overkill; simple restart)
       reg.progress = code === reg.pattern[0] ? 1 : 0;
       reg.lastTs = reg.progress ? now : null;
