@@ -91,9 +91,8 @@ function toCode(tok: string): string {
   }
   
   // Check alias first (handles both symbols and word aliases)
-  if (alias[tok] || alias[lower]) {
-    return alias[tok] || alias[lower];
-  }
+  const mapped = alias[tok] ?? alias[lower];
+  if (mapped) return mapped;
   // Default cases
   if (tok.length === 1 && /[a-z]/i.test(tok)) {
     return "Key" + tok.toUpperCase();
