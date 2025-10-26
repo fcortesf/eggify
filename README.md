@@ -72,6 +72,10 @@ onCheatCode("↑↑↓↓←→←→BA", () => {
 onCheatCode('ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight b a', () => {
   showEasterEgg('FAMOUS CODE!<br/>30 Lives Unlocked! 🎮', '🕹️');
 });
+// Secret code --> dev mode 
+onCheatCode('KeyD keyE keyV Space KeyM KeyO KeyD KeyE', () => {
+    showEasterEgg('Developer Mode ON<br/>Console access granted! 👨‍💻', '💻');
+});
 ```
 **Simple word cheat code**
 ```javascript
