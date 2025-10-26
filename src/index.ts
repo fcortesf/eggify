@@ -89,7 +89,17 @@ function toCode(tok: string): string {
               .replace(/^digit([0-9])/, (_, d) => "Digit" + d)
               .replace(/^arrow(up|down|left|right)/, (_, d) => "Arrow" + d.charAt(0).toUpperCase() + d.slice(1));
   }
-  return alias[lower] ?? tok;
+  // Check alias first
+  if (alias[lower]) {
+    return alias[lower];
+  }
+  
+  // Default case: if it's a single letter, convert to KeyX format
+  if (tok.length === 1 && /[a-z]/i.test(tok)) {
+    return "Key" + tok.toUpperCase();
+  }
+  
+  return tok;
 }
 
 function normalizePattern(p: PatternInput): string[] {
