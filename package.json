@@ -9,8 +9,8 @@
     "web",
     "keyboard"
   ],
-  "author": "Fernando Cortés <fernandocortesflores@gmail.com>",
-  "license": "MIT",
+  "author": "FCortesF <fernandocortesflores@gmail.com>",
+  "license": "Beerware",
   "repository": {
     "type": "git",
     "url": "https://github.com/fcortesf/eggify"

@@ -45,3 +45,25 @@ test('triggers handler on long key sequence', () => {
   window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyY', bubbles: true }));
   expect(handler).toHaveBeenCalled();
 });
+
+test('triggers handler on number key sequence', () => {
+  const handler = vi.fn();
+  onCheatCode("1 2 3 4 5", handler);
+  window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Digit1', bubbles: true }));
+  window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Digit2', bubbles: true }));
+  window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Digit3', bubbles: true }));
+  window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Digit4', bubbles: true }));
+  window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Digit5', bubbles: true }));
+  expect(handler).toHaveBeenCalled();
+});
+
+test('triggers handler numpad on number key sequence', () => {
+  const handler = vi.fn();
+  onCheatCode("1 2 3 4 5", handler);
+  window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Numpad1', bubbles: true }));
+  window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Numpad2', bubbles: true }));
+  window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Numpad3', bubbles: true }));
+  window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Numpad4', bubbles: true }));
+  window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Numpad5', bubbles: true }));
+  expect(handler).toHaveBeenCalled();
+});

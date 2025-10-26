@@ -50,17 +50,6 @@ function isEditableTarget(t: EventTarget | null): boolean {
 }
 
 function normalizeStringPattern(p: string): string[] {
-  // Allows "↑↑↓↓←→←→BA" or "ArrowUp ArrowUp ..." or "up up down down left right left right b a"
-  const mapSymbol: Record<string, string> = {
-    "↑": "ArrowUp",
-    "↓": "ArrowDown",
-    "←": "ArrowLeft",
-    "→": "ArrowRight",
-    "b": "KeyB",
-    "a": "KeyA",
-    "B": "KeyB",
-    "A": "KeyA",
-  };
   // If contains spaces, assume list of codes or words
   if (/\s/.test(p)) {
     return p
@@ -68,35 +57,50 @@ function normalizeStringPattern(p: string): string[] {
       .split(/\s+/)
       .map(tok => toCode(tok));
   }
-  // Without spaces: expand char by char
-  return Array.from(p).map(ch => mapSymbol[ch] ?? toCode(ch));
+  // Without spaces: expand char by char, let toCode handle all mappings
+  return Array.from(p).map(ch => toCode(ch));
 }
 
 function toCode(tok: string): string {
   const lower = tok.toLowerCase();
   const alias: Record<string, string> = {
-    up: "ArrowUp",
-    down: "ArrowDown",
-    left: "ArrowLeft",
-    right: "ArrowRight",
-    a: "KeyA",
-    b: "KeyB",
+    // Arrow aliases
+    "up": "ArrowUp",
+    "down": "ArrowDown", 
+    "left": "ArrowLeft",
+    "right": "ArrowRight",
+    // Symbol mappings
+    "↑": "ArrowUp",
+    "↓": "ArrowDown",
+    "←": "ArrowLeft", 
+    "→": "ArrowRight",
+    // Letter aliases
+    "a": "KeyA",
+    "b": "KeyB",
+    "A": "KeyA",
+    "B": "KeyB",
   };
-  // If already looks like KeyboardEvent.code (e.g., "ArrowUp", "KeyA"), use it
-  if (/^(Arrow(Up|Down|Left|Right)|Key[A-Z]|Digit[0-9]|Escape|Enter|Space|Tab|ShiftLeft|ShiftRight|ControlLeft|ControlRight|AltLeft|AltRight)$/i.test(tok)) {
-    // Normalize correct capitalization
-    return tok.replace(/^key([a-z])/, (_, c) => "Key" + c.toUpperCase())
-              .replace(/^digit([0-9])/, (_, d) => "Digit" + d)
-              .replace(/^arrow(up|down|left|right)/, (_, d) => "Arrow" + d.charAt(0).toUpperCase() + d.slice(1));
-  }
-  // Check alias first
-  if (alias[lower]) {
-    return alias[lower];
+  
+  // If already looks like KeyboardEvent.code, normalize it
+  if (/^(Arrow(Up|Down|Left|Right)|Key[A-Z]|Digit[0-9]|Numpad[0-9]|Escape|Enter|Space|Tab|ShiftLeft|ShiftRight|ControlLeft|ControlRight|AltLeft|AltRight)$/i.test(tok)) {
+
+    return tok.replace(/^key([a-z])/i, (_, c) => "Key" + c.toUpperCase())
+              .replace(/^digit([0-9])/i, (_, d) => "Digit" + d)
+              .replace(/^numpad([0-9])/i, (_, d) => "Numpad" + d)
+              .replace(/^arrow(up|down|left|right)/i, (_, d) => "Arrow" + d.charAt(0).toUpperCase() + d.slice(1));
   }
   
-  // Default case: if it's a single letter, convert to KeyX format
+  // Check alias first (handles both symbols and word aliases)
+  if (alias[tok] || alias[lower]) {
+    return alias[tok] || alias[lower];
+  }
+  // Default cases
   if (tok.length === 1 && /[a-z]/i.test(tok)) {
     return "Key" + tok.toUpperCase();
+  }
+  
+  if (tok.length === 1 && /[0-9]/.test(tok)) {
+    return "Digit" + tok;
   }
   
   return tok;
@@ -131,8 +135,9 @@ function onKeyDown(ev: KeyboardEvent) {
     // Ignore editables
     if (reg.opts.ignoreEditable && isEditableTarget(ev.target)) continue;
 
-    const code = ev.code || toGuessCode(ev);
+    let code = ev.code || toGuessCode(ev);
     const now = ev.timeStamp || performance.now();
+    if (code.startsWith("Numpad")) code = code.replace(/^Numpad/, "Digit");
 
     // Reset by delay
     if (reg.opts.maxKeyDelayMs !== (undefined as unknown as number) && reg.lastTs != null) {
@@ -156,7 +161,7 @@ function onKeyDown(ev: KeyboardEvent) {
           // swallow to not break the page
         }
       }
-    } else {
+    } else if(!code.startsWith("Shift") && !code.startsWith("Control") && !code.startsWith("Alt")) {
       // if doesn't match, see if restarts at 0 or 1 (KMP would be overkill; simple restart)
       reg.progress = code === reg.pattern[0] ? 1 : 0;
       reg.lastTs = reg.progress ? now : null;
