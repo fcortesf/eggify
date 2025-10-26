@@ -94,3 +94,6 @@ so it can be reviewed in more detail.
 (Fragment created using AI)
 
 I will add custom instructions for copilot in the near future
+
+## License
+Beerware 🍺 — do whatever you want with it, but if we meet, buy me a beer. (This is essentially MIT-like. Use it freely, but if we meet, buy me a beer)
