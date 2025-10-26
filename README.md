@@ -75,8 +75,10 @@ npx http-server ./local-browser-test -p 4000
 
 ## Size check
 npm install -g gzip-size-cli
+
 gzip-size dist/index.js dist/index.cjs dist/index.global.js
-1.2 kB
+
+1.26 kB
 
 ## 🧠 AI Usage Notice
 
