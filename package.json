@@ -1,10 +1,10 @@
 {
-  "name": "code-cheats",
-  "version": "1.0.1",
+  "name": "code-easter-eggs",
+  "version": "1.0.0",
   "description": "Add hidden easter eggs and cheat codes to your website easily 🥚",
   "keywords": [
     "easter-egg",
-    "cheatcode",
+    "secretcode",
     "secret",
     "web",
     "keyboard"

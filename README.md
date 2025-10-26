@@ -1,9 +1,9 @@
-# 🥚 code-cheats (eggify)
+# 🥚 code-easter-eggs (eggify)
 
 **Add hidden easter eggs and cheat codes to your website with one line.**
 
 ```bash
-npm install eggify
+npm install code-easter-eggs
 ```
 
 ## Features
@@ -17,7 +17,7 @@ npm install eggify
 ## How to use it
 **ESM**
 ```javascript
-import { onCheatCode } from "eggify";
+import { onCheatCode } from "code-easter-eggs";
 
 onCheatCode("↑↑↓↓←→←→BA", () => {
   alert("🥚 Secret unlocked!");
@@ -26,7 +26,7 @@ onCheatCode("↑↑↓↓←→←→BA", () => {
 
 **CJS**
 ```javascript
-const { onCheatCode } = require("eggify");
+const { onCheatCode } = require("code-easter-eggs");
 
 onCheatCode("↑↑↓↓←→←→BA", () => {
   console.log("hi!");
@@ -35,7 +35,7 @@ onCheatCode("↑↑↓↓←→←→BA", () => {
 
 **Browser (UMD/IIFE)**
 ```javascript
-<script src="https://unpkg.com/eggify/dist/index.global.js"></script>
+<script src="https://unpkg.com/code-easter-eggs/dist/index.global.js"></script>
 <script>
 
   Eggify.onCheatCode("↑↑↓↓←→←→BA", () => alert("🥚"));
@@ -45,7 +45,7 @@ onCheatCode("↑↑↓↓←→←→BA", () => {
 ```
 **Global**
 ```javascript
-import "eggify";
+import "code-easter-eggs";
 window.onCheatCode!("↑↑↓↓←→←→BA", () => { /* ... */ });
 
 ```
