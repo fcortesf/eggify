@@ -72,7 +72,7 @@ function toCode(tok: string): string {
     // Symbol mappings
     "↑": "ArrowUp",
     "↓": "ArrowDown",
-    "←": "ArrowLeft", 
+    "←": "ArrowLeft",
     "→": "ArrowRight",
     // Letter aliases
     "a": "KeyA",
