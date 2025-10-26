@@ -66,7 +66,7 @@ function toCode(tok: string): string {
   const alias: Record<string, string> = {
     // Arrow aliases
     "up": "ArrowUp",
-    "down": "ArrowDown", 
+    "down": "ArrowDown",
     "left": "ArrowLeft",
     "right": "ArrowRight",
     // Symbol mappings
