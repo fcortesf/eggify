@@ -1,4 +1,4 @@
-# 🥚 eggify
+# 🥚 code-cheat (eggify)
 
 **Add hidden easter eggs and cheat codes to your website with one line.**
 
